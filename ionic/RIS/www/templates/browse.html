@@ -1,0 +1,10 @@
+<ion-view view-title="Browse DB">
+  <ion-content>
+    <h3>Browse DB</h3>
+    <ion-list>
+      <ion-item ng-repeat="dish in Dishes" href="#/app/menu/{{dish.id}}">
+        {{dish.name}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,158 @@
+
+<!--
+  <div class="container">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li ><a href="index.html">Home</a></li>
+            <li class="active"><a href="browseform.html">Browse Inspection DB</a></li>
+        </ol>
+    </div>
+  </div>
+-->
+
+  <div class="container">
+    <div class="row row-content" ng-controller="BrowseController">
+
+      <div class="col-xs-12" ng-if="!showProjects">
+                      <h3>{{message}}</h3>
+      </div>
+
+      <div class="col-xs-12" ng-if="showProjects">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation"
+            ng-class="{active:isSelected(1)}">
+            <a ng-click="select(1)"
+             aria-controls="all"
+             role="tab">All Projects</a></li>
+            <li role="presentation"
+            ng-class="{active:isSelected(2)}">
+            <a ng-click="select(2)"
+             aria-controls="vehicles"
+             role="tab">Vehicles</a></li>
+            <li role="presentation"
+            ng-class="{active:isSelected(3)}">
+            <a ng-click="select(3)"
+             aria-controls="facilities"
+             role="tab">Facilities</a></li>
+
+        </ul>
+
+        <div class="tab-content">
+          <ul class="media-list tab-pane fade in active">
+
+
+          <li class="media" ng-repeat="project in projects | filter:filtText">
+              <div class="media-left media-middle">
+                  <!-- <a ui-sref="app.detailform({id:project._id})">-->
+                  <a ui-sref="app.detailform({id: project.id, name:project.name})">
+                  <img style="width:128px" class="media-object img-thumbnail"
+                   ng-src={{project.image}} alt="Project Image">
+                  </a>
+              </div>
+              <div class="media-body">
+                  <h2 class="media-heading">{{project.name}}
+                   <span class="badge">{{project.grantamount | currency}}</span></h2>
+                  <p>{{project.status}}</p>
+                  <p>{{project.description}}</p>
+                  <p>Project ID: {{project.id}} </p>
+
+              </div>
+          </li>
+        </ul>
+      </div>
+      </div>
+
+      <div class="container">
+        <div class ="row row-content">
+          <h3>Add project</h3>
+          <div class="col-xs-12 col-sm-9">
+<!--
+          <div class = "row">
+            <p>Debug Window</p>
+            <p>{{newProject.name}}</p>
+          </div>
+-->
+            <form class="form-horizontal" name="newProjectForm" ng-submit="submitProject()" novalidate>
+
+             <div class="form-group">
+              <label for="name" class="col-sm-2 control-label">Project Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Project Name"
+                ng-model="newProject.name">
+              </div>
+            </div>
+
+            <div class="form-group">
+             <label for="image" class="col-sm-2 control-label">Image</label>
+             <div class="col-sm-10">
+               <input type="text" class="form-control" id="image" name="image" placeholder="Enter URL of image"
+               ng-model="newProject.image">
+             </div>
+           </div>
+
+           <div class="form-group">
+            <label for="category" class="col-sm-2 control-label">Category</label>
+            <div class="col-sm-4">
+              <select ng-model="newProject.category" ng-options="category for category in categories" class="form-control" id="category" name="category"
+              >
+              </select>
+            </div>
+           </div>
+
+           <div class="form-group" >
+            <label for="status" class="col-sm-2 control-label">Status</label>
+            <div class="col-sm-10">
+            <label>
+              <input type="radio" ng-model="newProject.status" value="Normal"
+              >
+            Normal
+            </label>
+            <label>
+              <input type="radio" ng-model="newProject.status" value="Urgent"
+              >
+            Urgent
+            </label>
+            </div>
+           </div>
+
+
+           <div class="form-group">
+            <label for="grantamount" class="col-sm-2 control-label">Project Amount</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="grantamount" name="grantamount" placeholder="Enter Project Amount in $"
+              ng-model="newProject.grantamount">
+            </div>
+           </div>
+
+           <div class="form-group">
+               <label for="description" class="col-sm-2 control-label">Project Description</label>
+               <div class="col-sm-10">
+                   <textarea class="form-control" id="feedback" name="feedback" rows="12"
+                   ng-model="newProject.description"></textarea>
+               </div>
+           </div>
+
+
+           <div class="form-group">
+               <div class="col-sm-offset-2 col-sm-10">
+                   <button type="submit" class="btn btn-primary"  >Submit New Project</button>
+               </div>
+           </div>
+
+
+
+
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+    </div>
+  </div>

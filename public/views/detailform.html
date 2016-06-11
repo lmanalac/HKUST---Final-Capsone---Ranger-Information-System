@@ -1,0 +1,146 @@
+
+
+
+  <div class="container">
+    <div class="row row-content" ng-controller="DetailController">
+
+      <div class="col-xs-12" ng-if="!showProject">
+                      <h3>{{message}}</h3>
+      </div>
+
+      <div class="col-xs-12" ng-if="showProject">
+        <div class="media-left media-middle">
+          <a href="#">
+          <img style="width:128px" class="media-object img-thumbnail"
+              ng-src={{project.image}} alt="Project Image">
+          </a>
+        </div>
+        <div class="media-body">
+          <h2 class="media-heading">{{project.name}}
+          <span class="badge">{{project.grantamount | currency}}</span></h2>
+          <p>{{project.status}}
+          <p>{{project.description}}</p>
+          <p>{{project.id}}</p>
+
+<!--
+          <p>Sort Order: {{detailCtrl.sortBy}}</p>
+          <p>Enter Sort Order:
+          <input type="text" ng-model="detailCtrl.sortBy"></p>
+-->
+      </div>
+    </div>
+
+    <div class="col-xs-12">
+       <button class="btn btn-xs btn-primary pull-right"
+           type="button" ui-sref="app.browseform">
+           Back to Menu
+       </button>
+    </div>
+
+    <div class="container">
+      <div class ="row row-content">
+        <h3>Add Comment</h3>
+        <div class="col-xs-12 col-sm-9">
+<!--
+        <div class = "row">
+          <p>Debug Window</p>
+          <p>{{newComment.rating}}</p>
+          <p>{{newComment.note}}</p>
+          <p>{{newComment.author}}</p>
+        </div>
+-->
+          <form class="form-horizontal" name="newNoteForm" ng-submit="submitNote()" novalidate>
+
+           <div class="form-group"  >
+            <label for="rating" class="col-sm-2 control-label">Rating</label>
+            <div class="col-sm-10">
+              <label>
+              <input type="radio" ng-model="newComment.rating" value = 1>
+              1
+              </label>
+              <label>
+              <input type="radio" ng-model="newComment.rating" value = 2>
+              2
+              </label>
+              <label>
+              <input type="radio" ng-model="newComment.rating" value = 3>
+              3
+              </label>
+              <label>
+              <input type="radio" ng-model="newComment.rating" value = 4>
+              4
+              </label>
+              <label>
+              <input type="radio" ng-model="newComment.rating" value = 5>
+              5
+              </label>
+            </div>
+           </div>
+
+<!--
+           <div class="form-group"  >
+            <label for="note" class="col-sm-2 control-label">Note</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="note" name="note" placeholder="Enter Notes from Inspection"
+              ng-model="newComment.note">
+            </div>
+           </div>
+  -->
+           <div class="form-group">
+               <label for="description" class="col-sm-2 control-label">Note from Inspection</label>
+               <div class="col-sm-10">
+                   <textarea class="form-control" id="note" name="note" rows="12"
+                   ng-model="newComment.note"></textarea>
+               </div>
+           </div>
+
+
+           <div class="form-group"  >
+            <label for="author" class="col-sm-2 control-label">Author</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="author" name="author" placeholder="Enter Inspector Name"
+              ng-model="newComment.author">
+            </div>
+           </div>
+
+
+
+         <div class="form-group">
+             <div class="col-sm-offset-2 col-sm-10">
+                 <button type="submit" class="btn btn-primary"  >Submit New Note</button>
+             </div>
+         </div>
+
+
+
+
+
+
+        </form>
+      </div>
+    </div>
+    </div>
+
+    <div class="col-xs-9 col-xs-offset-1">
+      <!-- Task 3: Get and Execute Sort Order -->
+      <h3>Inspector Notes</h3>
+      <ul class = "media-list">
+        <li
+         class = "media"
+         ng-repeat = "
+         note in project.notes |
+            orderBy:sortBy"
+                                     >
+         <blockquote>
+            <p>Inspection Rating: {{note.rating}}</p>
+            <p>{{note.note}}</p>
+            <footer>{{note.author}}, {{note.date | date:medium}}</footer>
+          </blockquote>
+         </li>
+      </ul>
+    </div>
+
+
+
+ </div>
+</div>
